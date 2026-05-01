@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="manifest" href="/site.webmanifest"/>
 
-<!-- Open Graph -->
+<!-- Open Graph --
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Plated"/>
 <meta property="og:title" content="Plated, Fine Dining & Boutique"/
@@ -3293,23 +3293,23 @@ const BG={cream:'#f0ebe2',grey:'#e8e3d8',dusk:'#e5e0d7',warm:'#ede8df',amber:'#e
 const PRODUCTS=[
   /* ─── Essential by Christophe ──────────────────────────── */
   {id:'e1',resto:'essentiel',cat:'Textile',     name:'Elegance Jacket',                  price:189.5, badge:'Signature', gold:true,  svg:'essentiel_plate',   bg:'#f2ede6', icon:'◧',
-   photo1:'images/chef-jacket-paris-rooftop.jpg',
-   photo2:'images/chef-jacket-portrait.jpg',
+   photo1:'/chef-jacket-paris-rooftop.jpg',
+   photo2:'/chef-jacket-portrait.jpg',
    sceneLbl:'Bragard · Essential brigade',
    subtitle:'1 jacket'},
   {id:'e2',resto:'essentiel',cat:'Textile',     name:'Kitchen Towel',price:10,  badge:null,        gold:false, svg:'essentiel_towel',   bg:'#ede9e2', icon:'◧',
-   photo1:'images/kitchen-towel-pink-stripe-hanging.jpg',
-   photo2:'images/kitchen-towel-essential-logo.jpg',
+   photo1:'/kitchen-towel-pink-stripe-hanging.jpg',
+   photo2:'/kitchen-towel-essential-logo.jpg',
    sceneLbl:'Essential by Christophe · cuisine',
    subtitle:'1 piece, 100% cotton'},
   {id:'e3',resto:'essentiel',cat:'Tableware',   name:'Écume Service Plate', price:145, badge:'Handmade',  gold:true,  svg:'essentiel_plate',   bg:'#f0ebe2', icon:'◯',
-   photo1:'images/ecume-plate-top.jpg',
-   photo2:'images/ecume-plate-side.jpg',
+   photo1:'/ecume-plate-top.jpg',
+   photo2:'/ecume-plate-side.jpg',
    sceneLbl:'Bernardaud · 31,75 cm service plate',
    subtitle:'1 service plate · 31,75 cm'},
   {id:'e5',resto:'essentiel',cat:'Tableware',   name:'5-Piece Cutlery Set – Aquatic Collection', price:130, badge:'Made in France', gold:true, svg:'essentiel_plate', bg:'#edf0ee', icon:'✦',
-   photo1:'images/degrenne-aquatic-cutlery-set-5pc.jpg',
-   photo2:'images/degrenne-aquatic-fork-single.jpg',
+   photo1:'/degrenne-aquatic-cutlery-set-5pc.jpg',
+   photo2:'/degrenne-aquatic-fork-single.jpg',
    sceneLbl:'Aquatic Collection · 5-piece set',
    subtitle:'5-piece set · table fork, knife, spoons & dessert fork'}
 ];
@@ -3739,10 +3739,10 @@ function buildRelatedGrid(pgId, excludeId){
 function openProductPage(productId){
   const pageMap={'e1':'pg-product','e2':'pg-product-e2','e3':'pg-product-e3','e5':'pg-product-e5'};
   const galleryMap={
-    'e1':'images/chef-jacket-paris-rooftop.jpg',
-    'e2':'images/kitchen-towel-pink-stripe-hanging.jpg',
-    'e3':'images/ecume-plate-top.jpg',
-    'e5':'images/degrenne-aquatic-cutlery-set-5pc.jpg',
+    'e1':'/chef-jacket-paris-rooftop.jpg',
+    'e2':'/kitchen-towel-pink-stripe-hanging.jpg',
+    'e3':'/ecume-plate-top.jpg',
+    'e5':'/degrenne-aquatic-cutlery-set-5pc.jpg',
   };
   const pgId=pageMap[productId];
   if(!pgId)return;
