@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="manifest" href="/site.webmanifest"/>
 
-<!-- Open Graph --
+<!-- Open Graph -
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Plated"/>
 <meta property="og:title" content="Plated, Fine Dining & Boutique"/
@@ -3006,7 +3006,7 @@ document.getElementById('e4AddBtn')?.addEventListener('click',()=>{
           <div style="font-size:1.1rem;font-weight:600;letter-spacing:.06em;margin-bottom:.5rem">Contact Us</div>
           <p style="margin-bottom:1.2rem;opacity:.75;font-size:.9rem">Fill in the form below for any question regarding these terms, your personal data, or a return request.</p>
           <form id="termsContactForm" action="https://api.web3forms.com/submit" method="POST" style="display:flex;flex-direction:column;gap:1rem">
-            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+            <input type="hidden" name="access_key" value="192cab0e-e1c5-4755-9eed-576f2e4c54d3">
             <input type="hidden" name="subject" value="New message from Plated contact form">
             <input type="hidden" name="from_name" value="Plated Website">
             <div style="display:flex;gap:.75rem">
@@ -4774,6 +4774,57 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
     const btn = document.getElementById('mobToggleTerms');
     if(btn) btn.addEventListener('click', () => mobMenu.classList.contains('open') ? closeMob() : openMob());
   }
+
+  // — Terms Contact Form —
+  (function(){
+    const termsForm = document.getElementById('termsContactForm');
+    if (!termsForm) return;
+
+    termsForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = termsForm.querySelector('button[type="submit"]');
+      const originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const payload = {
+        access_key: '192cab0e-e1c5-4755-9eed-576f2e4c54d3',
+        subject: 'New message from Plated contact form',
+        from_name: 'Plated Website',
+        nom: termsForm.nom.value,
+        prenom: termsForm.prenom.value,
+        infos: termsForm.infos ? termsForm.infos.value : '',
+        objet: termsForm.objet ? termsForm.objet.value : '',
+        message: termsForm.message.value,
+        botcheck: '',
+      };
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.message || 'Submission failed');
+
+        termsForm.reset();
+        btn.textContent = 'Sent ✓';
+      } catch(err) {
+        console.error('Terms contact form error:', err);
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+        let errBox = document.getElementById('termsContactError');
+        if (!errBox) {
+          errBox = document.createElement('p');
+          errBox.id = 'termsContactError';
+          errBox.style.cssText = 'color:#c0392b;font-size:.85rem;margin-top:.5rem';
+          btn.parentNode.insertBefore(errBox, btn.nextSibling);
+        }
+        errBox.textContent = 'Sorry, message could not be sent. Please email us at hello@plated.us';
+      }
+    });
+  })();
 })();
 
 // ══════════════════════════════════════════════════════════
