@@ -3806,6 +3806,13 @@ function hookRelatedBragard(){
 ['footR','footS','footH'].forEach(id=>{
   document.getElementById(id)?.querySelectorAll('[data-go]').forEach(el=>wireGo(el));
 });
+
+// Checkout button listener (cart is in scope here)
+document.getElementById('cchkBtn').addEventListener('click', function() {
+  if(!cart || cart.length === 0){ showToast('Your cart is empty'); return; }
+  closeCart();
+  show('pg-checkout');
+});
 </script>
 
 <!-- ════════════════════════════════════════════════
@@ -4536,14 +4543,6 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
       if(txt.includes('boutique')) { shopState={resto:'all',cat:'all',price:'all',sort:'default'}; renderShop(); show('pg-shop'); }
       else show('pg-join');
     });
-  });
-
-  // Wire "Proceed to Checkout" in cart drawer → pg-checkout
-  document.getElementById('cdrw')?.addEventListener('click', (e) => {
-    if (!e.target.closest('#cchkBtn')) return;
-    if(!cart || cart.length === 0){ showToast('Your cart is empty'); return; }
-    closeCart();
-    show('pg-checkout');
   });
 
   // Chips toggle
