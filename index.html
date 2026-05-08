@@ -3826,7 +3826,7 @@ document.getElementById('cchkBtn').addEventListener('click', function() {
     const hasPlate = cart.some(item => item.id === 'e3');
 
     const stdPrice  = 18;                  // Standard UPS Ground: always $18
-    const exprPrice = hasPlate ? 25 : 18;  // Express: $25 for plate, $18 otherwise
+    const exprPrice = hasPlate ? 28 : 28;  // Express: always $28 (UPS 2nd Day Air)
     const giftPrice = 18;                  // Gift wrapping + standard: always $18
 
     // Update Standard label
@@ -4294,11 +4294,11 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
             <div class="ck-del-info"><div class="ck-del-name">Standard (UPS Ground)</div><div class="ck-del-eta">5–7 business days</div></div>
             <div class="ck-del-price" id="stdPrice">$18</div>
           </label>
-          <label id="exprDeliveryLabel" class="ck-del-opt" data-price="18" data-label="Express (UPS 2nd Day Air)">
+          <label id="exprDeliveryLabel" class="ck-del-opt" data-price="28" data-label="Express (UPS 2nd Day Air)">
             <input type="radio" name="delivery" value="express"/>
             <div class="ck-del-radio"></div>
             <div class="ck-del-info"><div class="ck-del-name">Express (UPS 2nd Day Air)</div><div class="ck-del-eta">2 business days</div></div>
-            <div class="ck-del-price" id="exprPrice">$18</div>
+            <div class="ck-del-price" id="exprPrice">$28</div>
           </label>
         </div>
       </div>
