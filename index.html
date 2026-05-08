@@ -3814,6 +3814,52 @@ document.getElementById('cchkBtn').addEventListener('click', function() {
   closeCart();
   show('pg-checkout');
 });
+
+
+  // ── Dynamic shipping rates based on cart contents ─────────────────────────
+  // Standard (UPS Ground, 5-7 days): $18 for all products
+  // Express (UPS 2nd Day Air): $18 for light items, $25 for Écume Service Plate (e3)
+  // Gift wrapping + standard: $18 for all products
+  // No shipping to Hawaii (HI) or Alaska (AK) — US continental only
+  window.updateShippingRates = function() {
+    // Detect if the heavy plate (Écume Service Plate, id: 'e3') is in the cart
+    const hasPlate = cart.some(item => item.id === 'e3');
+
+    const stdPrice  = 18;                  // Standard UPS Ground: always $18
+    const exprPrice = hasPlate ? 25 : 18;  // Express: $25 for plate, $18 otherwise
+    const giftPrice = 18;                  // Gift wrapping + standard: always $18
+
+    // Update Standard label
+    const stdLabel = document.getElementById('stdDeliveryLabel');
+    if (stdLabel) {
+      stdLabel.dataset.price = stdPrice;
+      const priceEl = document.getElementById('stdPrice');
+      if (priceEl) priceEl.textContent = '$' + stdPrice;
+      // Update data-label to reflect correct method name
+      stdLabel.dataset.label = 'Standard (UPS Ground, 5–7 days) — $' + stdPrice;
+    }
+
+    // Update Express label
+    const exprLabel = document.getElementById('exprDeliveryLabel');
+    if (exprLabel) {
+      exprLabel.dataset.price = exprPrice;
+      const priceEl = document.getElementById('exprPrice');
+      if (priceEl) priceEl.textContent = '$' + exprPrice;
+      exprLabel.dataset.label = 'Express (UPS 2nd Day Air) — $' + exprPrice;
+    }
+
+    // Update Gift wrapping label
+    const giftLabel = document.getElementById('giftDeliveryLabel');
+    if (giftLabel) {
+      giftLabel.dataset.price = giftPrice;
+      const priceEl = document.getElementById('giftPrice');
+      if (priceEl) priceEl.textContent = '$' + giftPrice;
+    }
+
+    // Re-trigger summary update so totals reflect new delivery price
+    renderCheckoutSummary();
+  }
+
 </script>
 
 <!-- ════════════════════════════════════════════════
@@ -4918,49 +4964,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
     if(delivLine) delivLine.textContent = deliveryCost === 0 ? 'Free' : fmt(deliveryCost);
   }
 
-  // ── Dynamic shipping rates based on cart contents ─────────────────────────
-  // Standard (UPS Ground, 5-7 days): $18 for all products
-  // Express (UPS 2nd Day Air): $18 for light items, $25 for Écume Service Plate (e3)
-  // Gift wrapping + standard: $18 for all products
-  // No shipping to Hawaii (HI) or Alaska (AK) — US continental only
-  window.updateShippingRates = function() {
-    // Detect if the heavy plate (Écume Service Plate, id: 'e3') is in the cart
-    const hasPlate = cart.some(item => item.id === 'e3');
 
-    const stdPrice  = 18;                  // Standard UPS Ground: always $18
-    const exprPrice = hasPlate ? 25 : 18;  // Express: $25 for plate, $18 otherwise
-    const giftPrice = 18;                  // Gift wrapping + standard: always $18
-
-    // Update Standard label
-    const stdLabel = document.getElementById('stdDeliveryLabel');
-    if (stdLabel) {
-      stdLabel.dataset.price = stdPrice;
-      const priceEl = document.getElementById('stdPrice');
-      if (priceEl) priceEl.textContent = '$' + stdPrice;
-      // Update data-label to reflect correct method name
-      stdLabel.dataset.label = 'Standard (UPS Ground, 5–7 days) — $' + stdPrice;
-    }
-
-    // Update Express label
-    const exprLabel = document.getElementById('exprDeliveryLabel');
-    if (exprLabel) {
-      exprLabel.dataset.price = exprPrice;
-      const priceEl = document.getElementById('exprPrice');
-      if (priceEl) priceEl.textContent = '$' + exprPrice;
-      exprLabel.dataset.label = 'Express (UPS 2nd Day Air) — $' + exprPrice;
-    }
-
-    // Update Gift wrapping label
-    const giftLabel = document.getElementById('giftDeliveryLabel');
-    if (giftLabel) {
-      giftLabel.dataset.price = giftPrice;
-      const priceEl = document.getElementById('giftPrice');
-      if (priceEl) priceEl.textContent = '$' + giftPrice;
-    }
-
-    // Re-trigger summary update so totals reflect new delivery price
-    renderCheckoutSummary();
-  }
 
   // Re-render summary every time checkout page is shown
   const _origShow = window.show;
