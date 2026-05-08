@@ -3427,7 +3427,7 @@ function addToCart(id,name,price,icon,cat,restoName){
   if(ex)ex.qty++;else cart.push({id,name,price:+price,icon,cat,restoName,qty:1});
   renderCart();showToast('Added to cart');openCart();
 
-  if(typeof updateShippingRates==='function') updateShippingRates();}
+  if(window.updateShippingRates) window.updateShippingRates();}
 function changeQty(id,d){
   const it=cart.find(i=>i.id===id);if(!it)return;
   it.qty+=d;if(it.qty<=0)cart=cart.filter(i=>i.id!==id);renderCart();
@@ -4923,7 +4923,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
   // Express (UPS 2nd Day Air): $18 for light items, $25 for Écume Service Plate (e3)
   // Gift wrapping + standard: $18 for all products
   // No shipping to Hawaii (HI) or Alaska (AK) — US continental only
-  function updateShippingRates() {
+  window.updateShippingRates = function() {
     // Detect if the heavy plate (Écume Service Plate, id: 'e3') is in the cart
     const hasPlate = cart.some(item => item.id === 'e3');
 
@@ -4966,7 +4966,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
   const _origShow = window.show;
   window.show = function(id){
     _origShow(id);
-    if(id === 'pg-checkout'){ renderCheckoutSummary(); updateShippingRates(); }
+    if(id === 'pg-checkout'){ renderCheckoutSummary(); if(window.updateShippingRates) window.updateShippingRates(); }
   };
 
   // Also re-render when delivery option changes
