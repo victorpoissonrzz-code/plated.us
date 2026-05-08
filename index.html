@@ -3882,7 +3882,8 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
     });
 
     // Delivery
-    const deliveryEl = document.querySelector('.ck-del-opt.selected');
+    const checkedRadio = document.querySelector('input[name="delivery"]:checked');
+    const deliveryEl = (checkedRadio ? checkedRadio.closest('.ck-del-opt') : null) || document.querySelector('.ck-del-opt.selected');
     const deliveryCost = deliveryEl ? parseFloat(deliveryEl.dataset.price || 0) : 0;
     const tax = subtotal * TAX_RATE;
     const total = subtotal + deliveryCost + tax;
@@ -3911,7 +3912,12 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
 
   // Re-render when delivery option changes
   document.querySelectorAll('#ckDeliveryOpts .ck-del-opt').forEach(opt => {
-    opt.addEventListener('click', () => setTimeout(window.renderCheckoutSummary, 50));
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('#ckDeliveryOpts .ck-del-opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      if(window.updateShippingRates) window.updateShippingRates();
+      setTimeout(window.renderCheckoutSummary, 50);
+    });
   });
 
 </script>
