@@ -3907,11 +3907,11 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
   const _origShow2 = window.show;
   window.show = function(id){
     _origShow2(id);
-    if(id === 'pg-checkout'){ window.renderCheckoutSummary(); if(window.updateShippingRates) window.updateShippingRates(); }
+    if(id === 'pg-checkout'){ window.renderCheckoutSummary(); if(window.updateShippingRates) window.updateShippingRates(); if(window.rewireDeliveryOpts) window.rewireDeliveryOpts(); }
   };
 
   // Re-render when delivery option changes (clone opts to remove conflicting listeners)
-  (function rewireDeliveryOpts() {
+  window.rewireDeliveryOpts = function() {
     const container = document.getElementById('ckDeliveryOpts');
     if (!container) return;
     container.querySelectorAll('.ck-del-opt').forEach(function(opt) {
@@ -3921,12 +3921,13 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
     container.querySelectorAll('.ck-del-opt').forEach(function(opt) {
       opt.addEventListener('click', function() {
         container.querySelectorAll('.ck-del-opt').forEach(function(o) { o.classList.remove('selected'); });
-        opt.classList.add('selected');
+        opt.classList.add('selected')
         if(window.updateShippingRates) window.updateShippingRates();
         setTimeout(window.renderCheckoutSummary, 50);
       });
     });
-  })();
+  };
+  window.rewireDeliveryOpts();
 
 </script>
 
