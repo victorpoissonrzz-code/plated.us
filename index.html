@@ -3907,7 +3907,7 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
   const _origShow2 = window.show;
   window.show = function(id){
     _origShow2(id);
-    if(id === 'pg-checkout'){ window.renderCheckoutSummary(); if(window.updateShippingRates) window.updateShippingRates(); if(window.rewireDeliveryOpts) window.rewireDeliveryOpts(); }
+    if(id === 'pg-checkout'){ window.renderCheckoutSummary(); if(window.updateShippingRates) window.updateShippingRates(); if(window.rewireDeliveryOpts) window.rewireDeliveryOpts(); if(window.initPromoCode) window.initPromoCode(); }
   };
 
   // Re-render when delivery option changes (clone opts to remove conflicting listeners)
@@ -3928,6 +3928,47 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
     });
   };
   window.rewireDeliveryOpts();
+
+  // ── Promo code ──────────────────────────────────────
+  window.initPromoCode = function() {
+    const PROMO_CODES = {
+      'TABLE010':   0.10,  // 10% off
+      'WELCOME15':  0.15,  // 15% off
+      'ESSENTIAL20':0.20   // 20% off
+    };
+    window._promoDiscount = window._promoDiscount || 0;
+    const promoBtn   = document.getElementById('ckPromoBtn');
+    const promoInput = document.getElementById('ckPromo');
+    if (!promoBtn || !promoInput) return;
+    // Clone to remove any previous listeners
+    const fresh = promoBtn.cloneNode(true);
+    promoBtn.parentNode.replaceChild(fresh, promoBtn);
+    if (promoInput.disabled) return; // already applied
+    fresh.addEventListener('click', function() {
+      const code = (promoInput.value || '').trim().toUpperCase();
+      const rate = PROMO_CODES[code];
+      if (!rate) {
+        promoInput.style.borderColor = '#c0392b';
+        fresh.textContent = 'Invalid';
+        setTimeout(() => { promoInput.style.borderColor = ''; fresh.textContent = 'Apply'; }, 2000);
+        return;
+      }
+      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      window._promoDiscount = subtotal * rate;
+      promoInput.disabled = true;
+      fresh.textContent = '\u2713 Applied';
+      fresh.style.background = 'var(--go)';
+      fresh.style.color = 'var(--ink)';
+      fresh.style.borderColor = 'var(--go)';
+      const discLine = document.getElementById('ckDiscountLine');
+      const discVal  = document.getElementById('ckDiscount');
+      if (discLine) discLine.style.display = 'flex';
+      if (discVal)  discVal.textContent = '\u2212$' + window._promoDiscount.toFixed(2);
+      window.renderCheckoutSummary();
+    });
+  };
+  window.initPromoCode();
+
 
 </script>
 
