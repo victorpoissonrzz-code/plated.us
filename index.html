@@ -3910,15 +3910,23 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
     if(id === 'pg-checkout'){ window.renderCheckoutSummary(); if(window.updateShippingRates) window.updateShippingRates(); }
   };
 
-  // Re-render when delivery option changes
-  document.querySelectorAll('#ckDeliveryOpts .ck-del-opt').forEach(opt => {
-    opt.addEventListener('click', () => {
-      document.querySelectorAll('#ckDeliveryOpts .ck-del-opt').forEach(o => o.classList.remove('selected'));
-      opt.classList.add('selected');
-      if(window.updateShippingRates) window.updateShippingRates();
-      setTimeout(window.renderCheckoutSummary, 50);
+  // Re-render when delivery option changes (clone opts to remove conflicting listeners)
+  (function rewireDeliveryOpts() {
+    const container = document.getElementById('ckDeliveryOpts');
+    if (!container) return;
+    container.querySelectorAll('.ck-del-opt').forEach(function(opt) {
+      var fresh = opt.cloneNode(true);
+      opt.parentNode.replaceChild(fresh, opt);
     });
-  });
+    container.querySelectorAll('.ck-del-opt').forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        container.querySelectorAll('.ck-del-opt').forEach(function(o) { o.classList.remove('selected'); });
+        opt.classList.add('selected');
+        if(window.updateShippingRates) window.updateShippingRates();
+        setTimeout(window.renderCheckoutSummary, 50);
+      });
+    });
+  })();
 
 </script>
 
