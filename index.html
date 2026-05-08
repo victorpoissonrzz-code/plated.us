@@ -3877,7 +3877,7 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
       div.innerHTML = item.photo1
         ? `<img src="${item.photo1}" alt="${item.name}" loading="lazy" decoding="async">`
         : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">${PSVG[item.svg]||''}</div>`;
-      div.innerHTML += `<div class="ck-sum-info"><div class="ck-sum-name">${item.name}</div><div class="ck-sum-meta">${item.category}</div></div><div class="ck-sum-price">$${(item.price * item.qty).toFixed(2)}</div>`;
+      div.innerHTML += `<div class="ck-sum-info"><div class="ck-sum-name">${item.name}</div><div class="ck-sum-meta">${item.restoName}</div></div><div class="ck-sum-price">$${(item.price * item.qty).toFixed(2)}</div>`;
       container.appendChild(div);
     });
 
