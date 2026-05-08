@@ -3858,6 +3858,62 @@ document.getElementById('cchkBtn').addEventListener('click', function() {
 
   }
 
+// ══ Checkout summary (moved from script 3 which has a syntax error) ══
+window.renderCheckoutSummary = function renderCheckoutSummary(){
+    const container = document.getElementById('ckSumItems');
+    if(!container) return;
+    container.innerHTML = '';
+
+    const TAX_RATE = 0.08875; // NY 8.875%
+    let subtotal = 0;
+
+    cart.forEach(item => {
+      subtotal += item.price * item.qty;
+      const div = document.createElement('div');
+      div.className = 'ck-sum-item';
+      const img = document.createElement('img');
+      img.src = item.photo1 || '';
+      img.alt = item.name;
+      div.innerHTML = item.photo1
+        ? `<img src="${item.photo1}" alt="${item.name}" loading="lazy" decoding="async">`
+        : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">${PSVG[item.svg]||''}</div>`;
+      div.innerHTML += `<div class="ck-sum-info"><div class="ck-sum-name">${item.name}</div><div class="ck-sum-meta">${item.category}</div></div><div class="ck-sum-price">$${(item.price * item.qty).toFixed(2)}</div>`;
+      container.appendChild(div);
+    });
+
+    // Delivery
+    const deliveryEl = document.querySelector('.ck-del-opt.selected');
+    const deliveryCost = deliveryEl ? parseFloat(deliveryEl.dataset.price || 0) : 0;
+    const tax = subtotal * TAX_RATE;
+    const total = subtotal + deliveryCost + tax;
+
+    // Promo
+    const promoDiscount = window._promoDiscount || 0;
+    const totalAfterPromo = Math.max(0, total - promoDiscount);
+
+    // Update display
+    const fmt = v => '$' + v.toFixed(2);
+    const setEl = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+    setEl('ckSubtotal', fmt(subtotal));
+    setEl('ckTax', fmt(tax));
+    setEl('ckTotal', fmt(totalAfterPromo));
+
+    const delivLine = document.getElementById('ckDeliveryLine');
+    if(delivLine) delivLine.textContent = deliveryCost === 0 ? 'Free' : fmt(deliveryCost);
+  };
+
+  // Re-render summary every time checkout page is shown
+  const _origShow2 = window.show;
+  window.show = function(id){
+    _origShow2(id);
+    if(id === 'pg-checkout'){ window.renderCheckoutSummary(); if(window.updateShippingRates) window.updateShippingRates(); }
+  };
+
+  // Re-render when delivery option changes
+  document.querySelectorAll('#ckDeliveryOpts .ck-del-opt').forEach(opt => {
+    opt.addEventListener('click', () => setTimeout(window.renderCheckoutSummary, 50));
+  });
+
 </script>
 
 <!-- ════════════════════════════════════════════════
