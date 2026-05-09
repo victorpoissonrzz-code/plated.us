@@ -3356,7 +3356,7 @@ function show(id){
   if(pg){pg.classList.add('active');history.replaceState(null,'',id==='pg-entry'?'/':'#'+id);}
   window.scrollTo(0,0);
     //  pathname routing: update URL for mapped pages
-            var _slug={'pg-essentiel':'/essentiel'};
+            var _slug={'pg-essentiel':'/essential'};
         if(_slug[id]){history.pushState({page:id},'',_slug[id]);}else if(id==='pg-entry'){history.pushState({page:id},'','/');}
   document.querySelectorAll('.tnav').forEach(n=>n.classList.remove('sc'));
   // re-observe reveals on new page
