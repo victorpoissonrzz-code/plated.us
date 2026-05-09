@@ -3486,8 +3486,8 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
       ? `<img src="${r.img}" alt="${r.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" loading="lazy"/ decoding="async">`
       : `<svg width="100%" height="100%" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="400" fill="${r.bgColor}"/>${r.deco}</svg>`;
     card.innerHTML=`<div class="rvis"><div class="rvis-bg">${visContent}</div><div class="rstars">${'★'.repeat(r.stars)} Michelin</div><div class="rcity">${r.city}</div><div class="rcard-ov"><div class="rcard-ov-lbl">${prods.length} products available</div><div class="rcard-ov-cta">Shop ${r.name} →</div></div></div><div class="rbody"><div class="rchef">${r.chef}</div><div class="rname">${r.name}</div><p class="rdesc">${r.desc}</p><div class="rfoot"><span class="rcuisine">${r.cuisine}</span><span class="rarr"><span style="color:var(--go)">${prods.length} products</span> →</span></div></div>`;
-    card.addEventListener('click',()=>{ if(r.id==='essentiel'){ openShopForResto('essentiel'); show('pg-shop'); } else openShopForResto(r.id); });
-    card.addEventListener('keydown',e=>{if(e.key==='Enter'){ if(r.id==='essentiel'){openShopForResto('essentiel'); show('pg-shop');}else openShopForResto(r.id);}});
+    card.addEventListener('click',()=>{ if(r.id==='essentiel'){ show('pg-essentiel'); } else openShopForResto(r.id); });
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'){ if(r.id==='essentiel'){show('pg-essentiel');}else openShopForResto(r.id);}});
     grid.appendChild(card);
   });
 
@@ -4242,6 +4242,75 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
 <!-- ════════════════════════════════════════════════
      PAGE, CHECKOUT
 ════════════════════════════════════════════════ -->
+<div class="page" id="pg-essentiel">
+  <nav class="tnav dark-nav" id="navEss">
+    <button class="tnav-logo" data-go="pg-entry"><span style="font-family:var(--ff);letter-spacing:.18em">Table<span style="display:inline-block;transform:scaleY(1.35);transform-origin:center bottom;letter-spacing:.12em;vertical-align:baseline">00</span></span><span class="tnav-sub"></span><span class="tnav-baseline">From their kitchen to yours</span></button>
+    <div class="tnav-links">
+      <a href="#" data-go="pg-restaurants">Restaurants</a>
+      <a href="#" data-go="pg-shop">Boutique</a>
+      <a href="#" data-go="pg-how">How It Works</a>
+    </div>
+    <div class="tnav-r">
+      <button class="cpill" id="cBtnEss">&nbsp;Cart <span class="cbadge" id="cbEss"></span></button>
+      <a href="#" data-go="pg-join" class="tnav-cta">Join us</a>
+      <button class="nav-toggle" id="navToggleEss" aria-label="Menu"><span></span><span></span><span></span><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="ec-hero">
+    <div class="ec-hero-img">
+      <img src="undefined" alt="Essential by Christophe" loading="lazy" decoding="async">
+    </div>
+    <div class="ec-hero-info">
+      <div class="ec-stars">★ Michelin</div>
+      <div class="ec-resto-name">Essential <em>by Christophe</em></div>
+      <div class="ec-chef">Chef Christophe</div>
+      <p class="ec-desc">A singular expression of seasonal French cuisine in New York. Chef Christophe&rsquo;s intimate dining room celebrates the finest ingredients with restraint and precision. Essential is the first partner restaurant on the Starred platform.</p>
+      <div class="ec-meta">
+        <div class="ec-meta-item"><span class="ec-meta-label">Cuisine</span><span class="ec-meta-val">Contemporary French &middot; Seasonal</span></div>
+        <div class="ec-meta-item"><span class="ec-meta-label">Location</span><span class="ec-meta-val">New York City</span></div>
+        <div class="ec-meta-item"><span class="ec-meta-label">Recognition</span><span class="ec-meta-val">1 Michelin Star</span></div>
+      </div>
+      <div class="ec-cta-row">
+        <button class="ec-btn-primary" id="essShopBtn">Shop the Collection</button>
+        <a href="#" data-go="pg-restaurants" class="ec-btn-secondary">All Restaurants</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ec-products">
+    <div class="ec-products-hdr">
+      <div class="ec-products-title">The <em>Collection</em></div>
+      <div class="ec-products-count"><span id="essProductCount">4</span> <span id="essCollCount">products</span></div>
+    </div>
+    <div class="ec-grid" id="essGrid"></div>
+  </div>
+
+  <div class="ec-signature">
+    <p class="ec-signature-quote">Every dish tells a story. Every object at our table is chosen with the same precision we bring to our cuisine.</p>
+    <div class="ec-signature-name">Chef Christophe &mdash; Essential by Christophe</div>
+  </div>
+
+  <div class="ec-chef-band">
+    <div class="ec-chef-portrait">
+      <img src="undefined" alt="Chef Christophe" loading="lazy" decoding="async">
+    </div>
+    <div class="ec-chef-words">
+      <div class="ec-chef-eyebrow">Meet the Chef</div>
+      <h2 class="ec-chef-name">Chef Christophe</h2>
+      <p class="ec-chef-quote">Restraint is the highest form of generosity at the table.</p>
+      <p class="ec-chef-bio">With two decades at the helm of some of New York&rsquo;s most celebrated kitchens, Chef Christophe brings a uniquely French sensibility to the city&rsquo;s dining scene. Essential is his most personal project yet &mdash; a restaurant and a philosophy.</p>
+      <div class="ec-chef-credentials">
+        <span class="ec-chef-cred">1 Michelin Star</span>
+        <span class="ec-chef-cred">Contemporary French</span>
+        <span class="ec-chef-cred">New York City</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot" id="footEss"></footer>
+</div>
+
 <div class="page" id="pg-checkout">
   <nav class="ck-nav">
     <button class="ck-nav-logo" data-go="pg-entry">
