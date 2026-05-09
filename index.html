@@ -3486,8 +3486,8 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
       ? `<img src="${r.img}" alt="${r.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" loading="lazy"/ decoding="async">`
       : `<svg width="100%" height="100%" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="400" fill="${r.bgColor}"/>${r.deco}</svg>`;
     card.innerHTML=`<div class="rvis"><div class="rvis-bg">${visContent}</div><div class="rstars">${'★'.repeat(r.stars)} Michelin</div><div class="rcity">${r.city}</div><div class="rcard-ov"><div class="rcard-ov-lbl">${prods.length} products available</div><div class="rcard-ov-cta">Shop ${r.name} →</div></div></div><div class="rbody"><div class="rchef">${r.chef}</div><div class="rname">${r.name}</div><p class="rdesc">${r.desc}</p><div class="rfoot"><span class="rcuisine">${r.cuisine}</span><span class="rarr"><span style="color:var(--go)">${prods.length} products</span> →</span></div></div>`;
-    card.addEventListener('click',()=>{ if(r.id==='essentiel'){ renderEssGridIfNeeded(); show('pg-essentiel'); } else openShopForResto(r.id); });
-    card.addEventListener('keydown',e=>{if(e.key==='Enter'){ if(r.id==='essentiel'){renderEssGridIfNeeded();show('pg-essentiel');}else openShopForResto(r.id);}});
+    card.addEventListener('click',()=>{ if(r.id==='essentiel'){ openShopForResto('essentiel'); show('pg-shop'); } else openShopForResto(r.id); });
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'){ if(r.id==='essentiel'){openShopForResto('essentiel'); show('pg-shop');}else openShopForResto(r.id);}});
     grid.appendChild(card);
   });
 
@@ -3885,12 +3885,13 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
     const checkedRadio = document.querySelector('input[name="delivery"]:checked');
     const deliveryEl = (checkedRadio ? checkedRadio.closest('.ck-del-opt') : null) || document.querySelector('.ck-del-opt.selected');
     const deliveryCost = deliveryEl ? parseFloat(deliveryEl.dataset.price || 0) : 0;
-    const tax = subtotal * TAX_RATE;
+    const promoDiscount = window._promoDiscount || 0;
+    const taxableAmount = Math.max(0, subtotal - promoDiscount);
+    const tax = taxableAmount * TAX_RATE;
     const total = subtotal + deliveryCost + tax;
 
     // Promo
-    const promoDiscount = window._promoDiscount || 0;
-    const totalAfterPromo = Math.max(0, total - promoDiscount);
+    const totalAfterPromo = total;
 
     // Update display
     const fmt = v => '$' + v.toFixed(2);
@@ -5050,12 +5051,13 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
     // Delivery
     const deliveryEl = document.querySelector('.ck-del-opt.selected');
     const deliveryCost = deliveryEl ? parseFloat(deliveryEl.dataset.price || 0) : 0;
-    const tax = subtotal * TAX_RATE;
+    const promoDiscount = window._promoDiscount || 0;
+    const taxableAmount = Math.max(0, subtotal - promoDiscount);
+    const tax = taxableAmount * TAX_RATE;
     const total = subtotal + deliveryCost + tax;
 
     // Promo
-    const promoDiscount = window._promoDiscount || 0;
-    const totalAfterPromo = Math.max(0, total - promoDiscount);
+    const totalAfterPromo = total;
 
     // Update display
     const fmt = v => '$' + v.toFixed(2);
