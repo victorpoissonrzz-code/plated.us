@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Essential by Christophe — Table00</title>
+  <meta name="description" content="Essential by Christophe — Michelin-starred Contemporary French restaurant in New York City. Discover the chef's curated collection of tableware and textile."/>
+  <link rel="canonical" href="https://www.table00.com/essential"/>
+  <link rel="icon" href="/favicon.png" type="image/png"/>
+
+  <!-- OG -->
+  <meta property="og:title" content="Essential by Christophe — Table00"/>
+  <meta property="og:description" content="A singular expression of seasonal French cuisine in New York."/>
+  <meta property="og:url" content="https://www.table00.com/essential"/>
+  <meta property="og:image" content="https://www.table00.com/og-image.jpg"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --w:#fff;--iv:#faf9f7;--par:#f2ede6;--par2:#ede7dc;
+      --ink:#0c0b09;--ch:#252320;
+      --st:#6b6762;--du:#b0aca4;--bo:#e4e0d8;
+      --go:#b8976a;--go2:rgba(184,151,106,.12);--go3:rgba(184,151,106,.05);
+      --ff:'Cormorant Garamond',Georgia,serif;
+      --fb:'Jost',sans-serif;
+      --ease:cubic-bezier(.4,0,.2,1);
+      --ease2:cubic-bezier(.76,0,.24,1);
+      --g:clamp(1.5rem,5vw,5rem);
+      --mx:1280px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:17px;scroll-behavior:smooth}
+    body{font-family:var(--fb);font-weight:400;color:var(--ink);background:var(--w);overflow-x:hidden}
+    img{display:block;max-width:100%;color:inherit;text-decoration:none}
+    button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+    h1,h2,h3,h4{font-family:var(--ff);font-weight:300;line-height:1.08;letter-spacing:-.015em}
+    .wrap{width:100%;max-width:var(--mx);margin-inline:auto;padding-inline:var(--g)}
+
+    /* ── NAV ── */
+    .tnav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem var(--g);transition:background .3s var(--ease),box-shadow .3s;background:rgba(0,0,0,.45);backdrop-filter:blur(8px)}
+    .tnav.scrolled{background:rgba(10,9,7,.92);box-shadow:0 1px 0 rgba(255,255,255,.07)}
+    .tnav-logo{display:flex;flex-direction:column;gap:.1rem;text-decoration:none;color:var(--w)}
+    .tnav-name{font-family:var(--ff);font-size:1.15rem;font-weight:300;letter-spacing:.18em;color:var(--w)}
+    .tnav-sub{font-family:var(--fb);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--go);opacity:.9}
+    .tnav-links{display:flex;gap:2rem;align-items:center}
+    .tnav-links a{font-family:var(--fb);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s}
+    .tnav-links a:hover{color:var(--w)}
+    .tnav-links a.active{color:var(--go)}
+    .tnav-r{display:flex;align-items:center;gap:1rem}
+    .cart-btn{font-family:var(--fb);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;transition:color .2s}
+    .cart-btn:hover{color:var(--w)}
+
+    /* ── HERO ── */
+    .ec-hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+    .ec-hero-img{position:relative;overflow:hidden;background:#111}
+    .ec-hero-img img{width:100%;height:100%;object-fit:cover;opacity:.85}
+    .ec-hero-info{background:#0a0907;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem}
+    .ec-stars{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+    .ec-star-badge{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--go);border:1px solid rgba(184,151,106,.3);padding:.3rem .8rem;display:inline-flex;align-items:center;gap:.4rem}
+    .ec-resto-name{font-family:var(--ff);font-size:clamp(2.8rem,5vw,4.2rem);font-weight:300;color:var(--w);line-height:1;margin-bottom:.4rem}
+    .ec-resto-name em{color:var(--go);font-style:italic;display:block}
+    .ec-chef-label{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--du);margin-bottom:1.8rem}
+    .ec-desc{font-family:var(--ff);font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.7;max-width:36ch;margin-bottom:2.5rem;border-left:2px solid var(--go);padding-left:1.2rem}
+    .ec-meta{display:flex;gap:2.5rem;margin-bottom:2.5rem}
+    .ec-meta-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--du);margin-bottom:.35rem}
+    .ec-meta-val{font-family:var(--ff);font-size:1.1rem;color:var(--w)}
+    .ec-cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+    .ec-btn-primary{padding:.85rem 2rem;background:var(--go);color:var(--w);font-family:var(--fb);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background .2s;display:inline-flex;align-items:center;gap:.5rem}
+    .ec-btn-primary:hover{background:#a07d50}
+    .ec-btn-secondary{padding:.85rem 2rem;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.75);font-family:var(--fb);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:border-color .2s,color .2s;display:inline-flex;align-items:center;gap:.5rem}
+    .ec-btn-secondary:hover{border-color:rgba(255,255,255,.6);color:var(--w)}
+
+    /* ── CHEF BAND ── */
+    .ec-chef-band{display:grid;grid-template-columns:1fr 1fr;min-height:70vh}
+    .ec-chef-img{position:relative;overflow:hidden;background:#f5f0ea}
+    .ec-chef-img img{width:100%;height:100%;object-fit:cover}
+    .ec-chef-info{background:var(--iv);display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem}
+    .ec-section-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--go);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+    .ec-section-tag::before{content:'';display:block;width:2rem;height:1px;background:var(--go)}
+    .ec-chef-name{font-family:var(--ff);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--ink);line-height:1.05;margin-bottom:.3rem}
+    .ec-chef-role{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--st);margin-bottom:2rem}
+    .ec-chef-quote{font-family:var(--ff);font-size:1.2rem;font-style:italic;color:var(--ink);line-height:1.6;border-left:2px solid var(--go);padding-left:1.2rem;margin-bottom:2rem}
+    .ec-chef-bio{font-size:.88rem;color:var(--st);line-height:1.75;max-width:48ch;margin-bottom:2rem}
+    .ec-awards{display:flex;flex-wrap:wrap;gap:.6rem}
+    .ec-award{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--st);display:flex;align-items:center;gap:.35rem}
+    .ec-award::before{content:'✦';color:var(--go);font-size:.5rem}
+
+    /* ── PRODUCTS ── */
+    .ec-products{padding:6rem var(--g);background:var(--w)}
+    .ec-products-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:3rem}
+    .ec-products-title{font-family:var(--ff);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300}
+    .ec-products-title em{color:var(--go);font-style:italic}
+    .ec-products-count{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--st)}
+    .ec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+    .ec-card{background:var(--iv);cursor:pointer;transition:transform .25s var(--ease);text-decoration:none;color:inherit;display:block}
+    .ec-card:hover{transform:translateY(-4px)}
+    .ec-card-img{aspect-ratio:3/4;overflow:hidden;position:relative;background:var(--par)}
+    .ec-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+    .ec-card:hover .ec-card-img img{transform:scale(1.04)}
+    .ec-card-badge{position:absolute;top:.75rem;left:.75rem;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;background:var(--ink);color:var(--w);padding:.3rem .6rem}
+    .ec-card-body{padding:1rem 1.1rem 1.2rem}
+    .ec-card-cat{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--go);margin-bottom:.4rem}
+    .ec-card-name{font-family:var(--ff);font-size:1.05rem;font-weight:400;line-height:1.2;margin-bottom:.3rem}
+    .ec-card-sub{font-size:.75rem;color:var(--st);margin-bottom:.8rem}
+    .ec-card-price{font-family:var(--ff);font-size:1.1rem}
+    .ec-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem}
+    .ec-add-btn{width:2rem;height:2rem;border-radius:50%;background:var(--ink);color:var(--w);display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:none;cursor:pointer;transition:background .2s}
+    .ec-add-btn:hover{background:var(--go)}
+
+    /* ── SIGNATURE ── */
+    .ec-signature{background:var(--ink);padding:6rem var(--g);text-align:center}
+    .ec-sig-quote{font-family:var(--ff);font-size:clamp(1.5rem,3vw,2.3rem);font-style:italic;color:var(--w);line-height:1.5;max-width:60ch;margin:0 auto 1.5rem;position:relative}
+    .ec-sig-quote::before{content:'"';position:absolute;top:-.5rem;left:-.5rem;font-size:4rem;color:rgba(184,151,106,.2);font-family:var(--ff);line-height:1}
+    .ec-sig-author{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--go)}
+
+    /* ── FOOTER ── */
+    footer.ec-foot{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:2rem var(--g);display:flex;align-items:center;justify-content:space-between}
+    .ec-foot-copy{font-size:.7rem;color:rgba(255,255,255,.35);letter-spacing:.08em}
+    .ec-foot-link{font-size:.7rem;color:rgba(255,255,255,.35);letter-spacing:.08em;text-decoration:none;transition:color .2s}
+    .ec-foot-link:hover{color:var(--go)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .ec-hero,.ec-chef-band{grid-template-columns:1fr}
+      .ec-hero-img,.ec-chef-img{min-height:50vw}
+      .ec-hero-info,.ec-chef-info{padding:3rem 1.5rem}
+      .ec-grid{grid-template-columns:repeat(2,1fr)}
+      .tnav-links{display:none}
+    }
+    @media(max-width:500px){
+      .ec-grid{grid-template-columns:1fr}
+      .ec-meta{flex-wrap:wrap;gap:1.2rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="tnav" id="nav">
+    <a href="https://www.table00.com" class="tnav-logo">
+      <span class="tnav-name">T a b l e 0 0</span>
+      <span class="tnav-sub">From their kitchen to yours</span>
+    </a>
+    <div class="tnav-links">
+      <a href="https://www.table00.com/#pg-restaurants">Restaurants</a>
+      <a href="https://www.table00.com/#pg-shop">Boutique</a>
+      <a href="https://www.table00.com/#pg-how">How It Works</a>
+    </div>
+    <div class="tnav-r">
+      <a href="https://www.table00.com/#pg-shop" class="cart-btn">Cart</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="ec-hero">
+    <div class="ec-hero-img">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" alt="Essential by Christophe restaurant interior"/>
+    </div>
+    <div class="ec-hero-info">
+      <div class="ec-stars">
+        <span class="ec-star-badge">★ Michelin</span>
+      </div>
+      <h1 class="ec-resto-name">Essential<em>by Christophe</em></h1>
+      <p class="ec-chef-label">Chef Christophe Bellanca</p>
+      <p class="ec-desc">A singular expression of seasonal French cuisine in New York. Chef Christophe's intimate dining room celebrates the finest ingredients with restraint and precision. Essential is the first partner restaurant on the Plated platform.</p>
+      <div class="ec-meta">
+        <div class="ec-meta-item">
+          <div class="ec-meta-label">Location</div>
+          <div class="ec-meta-val">New York City</div>
+        </div>
+        <div class="ec-meta-item">
+          <div class="ec-meta-label">Cuisine</div>
+          <div class="ec-meta-val">Contemporary French</div>
+        </div>
+        <div class="ec-meta-item">
+          <div class="ec-meta-label">Products</div>
+          <div class="ec-meta-val">5</div>
+        </div>
+      </div>
+      <div class="ec-cta-row">
+        <a href="#collection" class="ec-btn-primary">Shop the Collection →</a>
+        <a href="https://www.table00.com/#pg-restaurants" class="ec-btn-secondary">← All Restaurants</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEF -->
+  <section class="ec-chef-band">
+    <div class="ec-chef-img">
+      <img src="https://www.table00.com/chef-jacket-portrait.jpg" alt="Chef Christophe Bellanca"/>
+    </div>
+    <div class="ec-chef-info">
+      <div class="ec-section-tag">The Chef</div>
+      <h2 class="ec-chef-name">Christophe<br>Bellanca</h2>
+      <p class="ec-chef-role">Chef &amp; Owner · Essential by Christophe</p>
+      <blockquote class="ec-chef-quote">I believe food can transport guests on a culinary journey. Every dish, every object in this room has earned its place, chosen for what it is, not what it represents.</blockquote>
+      <p class="ec-chef-bio">Raised in the Ardèche, France, Christophe Bellanca trained alongside Georges Blanc, Régis Marcon and Anne-Sophie Pic before moving to New York, where he led the kitchens of Le Cirque and L'Atelier de Joël Robuchon, earning two Michelin stars. In 2022 he opened Essential by Christophe on the Upper West Side, a singular expression of modern French cuisine built on restraint, precision, and the purity of the essential.</p>
+      <div class="ec-awards">
+        <span class="ec-award">Michelin Star 2023</span>
+        <span class="ec-award">Wine Spectator Award 2025</span>
+        <span class="ec-award">Best UWS Restaurant, NY Post</span>
+        <span class="ec-award">35+ Years in Fine Dining</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="ec-products" id="collection">
+    <div class="ec-products-head">
+      <h2 class="ec-products-title">The <em>Collection</em></h2>
+      <span class="ec-products-count">5 Products</span>
+    </div>
+    <div class="ec-grid">
+      <a href="https://www.table00.com/#pg-product" class="ec-card">
+        <div class="ec-card-img">
+          <img src="https://www.table00.com/chef-jacket-collar-detail-a.jpg" alt="Elegance Jacket"/>
+          <span class="ec-card-badge">Signature</span>
+        </div>
+        <div class="ec-card-body">
+          <div class="ec-card-cat">Textile</div>
+          <div class="ec-card-name">Elegance Jacket</div>
+          <div class="ec-card-sub">1 jacket, double-breasted, white twill cotton</div>
+          <div class="ec-card-footer">
+            <span class="ec-card-price">$189.5</span>
+            <button class="ec-add-btn" aria-label="Add to cart">+</button>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.table00.com/#pg-shop" class="ec-card">
+        <div class="ec-card-img">
+          <img src="https://www.table00.com/kitchen-towel-pink-stripe-detail.jpg" alt="Kitchen Towel"/>
+        </div>
+        <div class="ec-card-body">
+          <div class="ec-card-cat">Textile</div>
+          <div class="ec-card-name">Kitchen Towel</div>
+          <div class="ec-card-sub">1 piece, 100% cotton</div>
+          <div class="ec-card-footer">
+            <span class="ec-card-price">$10</span>
+            <button class="ec-add-btn" aria-label="Add to cart">+</button>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.table00.com/#pg-shop" class="ec-card">
+        <div class="ec-card-img">
+          <img src="https://www.table00.com/ecume-plate-top.jpg" alt="Écume Service Plate"/>
+          <span class="ec-card-badge">Handmade</span>
+        </div>
+        <div class="ec-card-body">
+          <div class="ec-card-cat">Tableware</div>
+          <div class="ec-card-name">Écume Service Plate</div>
+          <div class="ec-card-sub">1 service plate · 31.75 cm (12.5")</div>
+          <div class="ec-card-footer">
+            <span class="ec-card-price">$145</span>
+            <button class="ec-add-btn" aria-label="Add to cart">+</button>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.table00.com/#pg-shop" class="ec-card">
+        <div class="ec-card-img">
+          <img src="https://www.table00.com/aquatic-cutlery-dining-scene.jpg" alt="5-Piece Cutlery Set"/>
+          <span class="ec-card-badge">Made in France</span>
+        </div>
+        <div class="ec-card-body">
+          <div class="ec-card-cat">Tableware</div>
+          <div class="ec-card-name">5-Piece Cutlery Set – Aquatic Collection</div>
+          <div class="ec-card-sub">5-piece set · fork, knife, spoons &amp; dessert fork</div>
+          <div class="ec-card-footer">
+            <span class="ec-card-price">$130</span>
+            <button class="ec-add-btn" aria-label="Add to cart">+</button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- SIGNATURE QUOTE -->
+  <section class="ec-signature">
+    <p class="ec-sig-quote">Every object in this collection has earned its place at Essential's table. We share them because great things deserve to travel beyond the dining room.</p>
+    <p class="ec-sig-author">Chef Christophe Bellanca · Essential by Christophe</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ec-foot">
+    <span class="ec-foot-copy">© 2026 Plated. All rights reserved.</span>
+    <a href="https://www.table00.com" class="ec-foot-link">Designed for excellence.</a>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+  </script>
+
+</body>
+</html>
