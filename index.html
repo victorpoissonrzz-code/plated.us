@@ -4698,7 +4698,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
 
   // Chips toggle
   document.querySelectorAll('#jChips .join-chip').forEach(chip => {
-    chip.addEventListener('click', () => chip.classList.toggle('selected'); chip.setAttribute('aria-checked', chip.classList.contains('selected') ? 'true' : 'false'));
+    chip.addEventListener('click', () => { chip.classList.toggle('selected'); chip.setAttribute('aria-checked', chip.classList.contains('selected') ? 'true' : 'false'); });
   });
 
   // Form validation & submit
