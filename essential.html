@@ -76,10 +76,11 @@
     .ec-btn-secondary:hover{border-color:rgba(255,255,255,.6);color:var(--w)}
 
     /* ── CHEF BAND ── */
-    .ec-chef-band{display:grid;grid-template-columns:420px 1fr;align-items:stretch;background:var(--iv)}
+    .ec-chef-wrap{background:var(--iv);padding:0}
+    .ec-chef-band{display:grid;grid-template-columns:480px 1fr;max-width:1100px;margin:0 auto;align-items:stretch;background:var(--iv)}
     .ec-chef-img{background:var(--par);display:flex;align-items:center;justify-content:center;overflow:hidden}
     .ec-chef-img img{width:100%;height:auto;object-fit:contain;object-position:top center;display:block}
-    .ec-chef-info{background:var(--iv);display:flex;flex-direction:column;justify-content:center;padding:4rem 3.5rem}
+    .ec-chef-info{background:var(--iv);display:flex;flex-direction:column;justify-content:center;padding:4rem 3.5rem;max-width:540px}
     .ec-section-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--go);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
     .ec-section-tag::before{content:'';display:block;width:2rem;height:1px;background:var(--go)}
     .ec-chef-name{font-family:var(--ff);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:var(--ink);line-height:1.05;margin-bottom:.3rem}
@@ -190,7 +191,7 @@
   </section>
 
   <!-- CHEF -->
-  <section class="ec-chef-band">
+  <section class="ec-chef-wrap"><div class="ec-chef-band">
     <div class="ec-chef-img">
       <img src="/chef-bellanca.jpg" alt="Chef Christophe Bellanca"/>
     </div>
@@ -207,7 +208,7 @@
         <span class="ec-award">35+ Years in Fine Dining</span>
       </div>
     </div>
-  </section>
+  </div></section>
 
   <!-- COLLECTION -->
   <section class="ec-products" id="collection">
