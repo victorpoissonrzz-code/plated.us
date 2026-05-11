@@ -44,9 +44,10 @@
     /* ── NAV ── */
     .tnav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem var(--g);transition:background .3s var(--ease),box-shadow .3s;background:rgba(0,0,0,.45);backdrop-filter:blur(8px)}
     .tnav.scrolled{background:rgba(10,9,7,.92);box-shadow:0 1px 0 rgba(255,255,255,.07)}
-    .tnav-logo{display:flex;flex-direction:column;gap:.1rem;text-decoration:none;color:var(--w)}
-    .tnav-name{font-family:var(--ff);font-size:1.15rem;font-weight:300;letter-spacing:.18em;color:var(--w)}
-    .tnav-sub{font-family:var(--fb);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--go);opacity:.9}
+    .tnav-logo{display:flex;flex-direction:column;gap:.15rem;text-decoration:none;color:var(--w);align-items:flex-start}
+    .tnav-name{font-family:var(--ff);font-size:1.35rem;font-weight:300;letter-spacing:.22em;color:var(--w);line-height:1}
+    .tnav-stars{font-size:.6rem;letter-spacing:.3em;color:var(--go);line-height:1;margin:.1rem 0}
+    .tnav-sub{font-family:var(--ff);font-size:.58rem;letter-spacing:.05em;font-style:italic;color:var(--go);opacity:.9;font-weight:300}
     .tnav-links{display:flex;gap:2rem;align-items:center}
     .tnav-links a{font-family:var(--fb);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s}
     .tnav-links a:hover{color:var(--w)}
@@ -145,6 +146,7 @@
   <nav class="tnav" id="nav">
     <a href="https://www.table00.com" class="tnav-logo">
       <span class="tnav-name">T a b l e 0 0</span>
+      <span class="tnav-stars">★ ★ ★ ★ ★</span>
       <span class="tnav-sub">From their kitchen to yours</span>
     </a>
     <div class="tnav-links">
