@@ -1,4 +1,4 @@
-// api/checkout.js
+→→—──—────────–──→──────────────────────────────────────────——──────────────────────────────────────────────────────────// api/checkout.js
 //
 // Vercel serverless function that creates a Stripe Checkout Session
 // and returns the hosted-checkout URL to the front-end.
