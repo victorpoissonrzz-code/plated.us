@@ -20,7 +20,7 @@
 <!-- Open Graph -
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Table00"/>
-<meta property="og:title" content="Table00, Fine Dining & Boutique"/
+<meta property="og:title" content="Table00, Fine Dining & Boutique"
 <meta property="og:description" content="Michelin-starred restaurants & shoppable boutique. Reserve a table or shop curated kitchen and tabletop essentials."/>
 <meta property="og:url" content="https://plated.us/"/
 <meta property="og:image" content="https://plated.us/og-image.jpg"/>
@@ -3967,6 +3967,7 @@ window.renderCheckoutSummary = function renderCheckoutSummary(){
       }
       const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
       window._promoDiscount = subtotal * rate;
+      window._appliedPromoCode = code; // store applied code for checkout
       promoInput.disabled = true;
       fresh.textContent = '\u2713 Applied';
       fresh.style.background = 'var(--go)';
@@ -5233,15 +5234,6 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
         currency: 'usd',
       });
     }
-    // Apply promo discount as a negative line item
-    if(window._promoDiscount && window._promoDiscount > 0){
-      lineItems.push({
-        name:     'Promo discount',
-        amount:   -Math.round(window._promoDiscount * 100),
-        quantity: 1,
-        currency: 'usd',
-      });
-    }
 
     try {
       const res = await fetch('/api/checkout', {
@@ -5253,6 +5245,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
           customerName,
           shippingAddress,
           delivery: { label: deliveryLabel, cost: deliveryCost }
+          promoCode: window._appliedPromoCode || '',
         }),
       });
       if(!res.ok) throw new Error('HTTP ' + res.status);
