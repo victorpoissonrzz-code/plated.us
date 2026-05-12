@@ -5220,7 +5220,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
     // Build line items for Stripe
     const lineItems = cart.map(item => ({
       name:     item.name,
-      amount:   Math.round(item.price * 100), // cents
+      amount:   Math.round(item.price * (1 - (window._promoDiscount||0)) * 100), // cents after promo
       quantity: item.qty,
       currency: 'usd',
     }));
