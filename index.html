@@ -5220,7 +5220,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
     // Build line items for Stripe
     const lineItems = cart.map(item => ({
       name:     item.name,
-      amount:   Math.round(item.price * (1 - (window._promoDiscount||0)) * 100), // cents after promo
+      amount:   Math.round(item.price * 100), // cents
       quantity: item.qty,
       currency: 'usd',
     }));
@@ -5229,6 +5229,15 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
       lineItems.push({
         name:     deliveryLabel,
         amount:   Math.round(deliveryCost * 100),
+        quantity: 1,
+        currency: 'usd',
+      });
+    }
+    // Apply promo discount as a negative line item
+    if(window._promoDiscount && window._promoDiscount > 0){
+      lineItems.push({
+        name:     'Promo discount',
+        amount:   -Math.round(window._promoDiscount * 100),
         quantity: 1,
         currency: 'usd',
       });
