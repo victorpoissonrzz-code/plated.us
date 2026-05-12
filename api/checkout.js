@@ -82,7 +82,7 @@ module.exports = async (req, res) => {
         product_data: {
           name: String(item.name || 'Item').slice(0, 250),
 },
-        unit_amount: Math.max(0, Math.round(Number(item.amount) || 0)),
+        unit_amount: Math.round(Number(item.amount) || 0), // allows negative for discount line items
 },
       quantity: Math.max(1, Math.round(Number(item.quantity) || 1)),
 }));
