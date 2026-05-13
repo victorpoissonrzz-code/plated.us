@@ -3336,7 +3336,7 @@ const PRODUCTS=[
 ];
 
 /* ── CART STATE ── */
-let cart=[];
+window.cart=[];
 let shopState={resto:'all',cat:'all',price:'all',sort:'default'};
 
 /* ── FOOTER HTML ── */
@@ -4554,7 +4554,7 @@ document.querySelectorAll('.pdp-acc-item').forEach(item=>{
   goTo(0);
 })();
 
-// E5, Cart button, add-to-cart, wishlist
+// E5, Cart button, add-to-window.cart, wishlist
 document.getElementById('cBtnE5')?.addEventListener('click', openCart);
 
 document.getElementById('e5AddBtn')?.addEventListener('click', () => {
@@ -4599,7 +4599,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
           ${p.subtitle ? `<div class="ec-card-sub">${p.subtitle}</div>` : ''}
           <div class="ec-card-foot">
             <span class="ec-card-price">$${p.price.toFixed(2)}</span>
-            <button class="ec-card-add" data-add="${p.id}" aria-label="Add to cart">+</button>
+            <button class="ec-card-add" data-add="${p.id}" aria-label="Add to window.cart">+</button>
           </div>
         </div>`;
       grid.appendChild(card);
@@ -4615,7 +4615,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
       });
     });
 
-    // Wire add-to-cart buttons
+    // Wire add-to-window.cart buttons
     grid.querySelectorAll('[data-add]').forEach(btn => {
       btn.addEventListener('click', e => {
         e.stopPropagation();
@@ -4643,11 +4643,11 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
 
   // Cart badge sync
   function syncEssBadge(){
-    const n = cart.reduce((s,i)=>s+i.qty,0);
+    const n = window.cart.reduce((s,i)=>s+i.qty,0);
     const badge = document.getElementById('cbEss');
     if(badge){ badge.textContent=n; badge.classList.toggle('vis',n>0); }
   }
-  // Hook into cart updates
+  // Hook into window.cart updates
   const _orig = window._cartUpdated;
   window._cartUpdated = function(){ if(_orig) _orig(); syncEssBadge(); };
 
@@ -5020,7 +5020,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
       const refEl = document.getElementById('cfRef');
       if(refEl) refEl.textContent = ref;
       // Vider le panier
-      cart = [];
+      window.cart = [];
       renderCart && renderCart();
       // Afficher la page confirmation
       show('pg-confirm');
@@ -5029,7 +5029,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
       show('pg-checkout');
       const errEl = document.getElementById('ckPayErr');
       if(errEl){
-        errEl.textContent = 'Payment was cancelled. Your cart is still saved.';
+        errEl.textContent = 'Payment was cancelled. Your window.cart is still saved.';
         errEl.classList.add('show');
       }
     }
@@ -5044,7 +5044,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
     const TAX_RATE = 0.08875; // NY 8.875%
     let subtotal = 0;
 
-    cart.forEach(item => {
+    window.cart.forEach(item => {
       subtotal += item.price * item.qty;
       const row = document.createElement('div');
       row.className = 'ck-sum-item';
@@ -5118,7 +5118,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
         }, 2000);
         return;
       }
-      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const subtotal = window.cart.reduce((s, i) => s + i.price * i.qty, 0);
       window._promoDiscount = subtotal * rate;
       promoInput.disabled = true;
       promoBtn.textContent = '✓ Applied';
@@ -5177,12 +5177,12 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
 
   if(!payBtn) return;
 
-  // Guard: empty cart
+  // Guard: empty window.cart
   payBtn.addEventListener('click', async function(){
-    // Check cart
-    if(!cart || cart.length === 0){
+    // Check window.cart
+    if(!window.cart || window.cart.length === 0){
       if(payErr){
-        payErr.textContent = 'Your cart is empty. Please add a product before paying.';
+        payErr.textContent = 'Your window.cart is empty. Please add a product before paying.';
         payErr.classList.add('show');
       }
       return;
@@ -5219,7 +5219,7 @@ document.getElementById('e5WishBtn')?.addEventListener('click', function(){
     const deliveryCost  = parseFloat(deliveryOpt?.dataset.price || 0);
 
     // Build line items for Stripe
-    const lineItems = cart.map(item => ({
+    const lineItems = window.cart.map(item => ({
       name:     item.name,
       amount:   Math.round(item.price * 100), // cents
       quantity: item.qty,
